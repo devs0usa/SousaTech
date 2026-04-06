@@ -1,4 +1,3 @@
-/* GERAL */
 body {
 margin: 0;
 font-family: 'Poppins';
@@ -6,229 +5,177 @@ background: #050510;
 color: white;
 overflow-x: hidden;
 }
+
+/* FUNDO */
 canvas {
 position: fixed;
 top: 0;
 left: 0;
+width: 100%;
+height: 100%;
 z-index: -1;
 }
+
 /* LOGO */
 .logo {
 font-family: 'Orbitron';
-font-size: 60px;
-padding: 30px;
+font-size: 32px;
+padding: 20px;
 }
+
 .logo span {
-background: linear-gradient(90deg, #8a2be2, #00ffff);
-background-clip: text;-webkit-background-clip: text;
--webkit-text-fill-color: transparent;
+background: linear-gradient(90deg, #00ffff, #8a2be2);
+background-clip: text;
 color: transparent;
-display: inline-block;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 }
+
+/* MENU */
+.menu-right {
+position: absolute;
+top: 30px;
+right: 40px;
+display: flex;
+gap: 20px;
+}
+
+.menu-right a {
+color: white;
+text-decoration: none;
+transition: 0.3s;
+}
+
+.menu-right a:hover {
+color: #00ffff;
+}
+
 /* HERO */
 .hero {
 display: flex;
 justify-content: space-between;
-padding: 40px 80px;
+align-items: center;
+padding: 40px;
 }
+
 .left h2 {
-font-size: 64px;
+font-size: 50px;
 }
+
 .gradient {
-background: linear-gradient(90deg, #8a2be2, #00ffff);
+background: linear-gradient(90deg, #00ffff, #8a2be2);
 background-clip: text;
+color: transparent;
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
-color: transparent;
-display: inline-block;
 }
-.tags {
-display: flex;
-gap: 15px;
-margin-top: 30px;
-}
-.tags div {
-padding: 10px 20px;
-border: 1px solid rgba(0,255,255,0.4);
-border-radius: 30px;
-}
-/* BOTÃO WHATSAPP */
+
+/* BOTÃO */
 .cta {
-margin-top: 30px;
+display: inline-block;
+margin-top: 20px;
 padding: 15px 30px;
-border-radius: 40px;border: none;
-cursor: pointer;
-font-weight: 600;
-font-size: 18px;
+border-radius: 30px;
+background: linear-gradient(90deg, #00ffff, #8a2be2);
 text-decoration: none;
 color: white;
-background: linear-gradient(90deg, #8a2be2, #00ffff, #8a2be2);
-background-size: 200% 200%;
-transition: all 0.4s ease;
-display: inline-block;
 }
-.cta:hover {
-background-position: 100% 0;
-transform: scale(1.05);
-box-shadow: 0 0 20px #00ffff, 0 0 40px #8a2be2;
-}
+
 /* CELULAR */
 .phone {
-width: 300px;
-height: 600px;
-border-radius: 40px;
+width: 250px;
+height: 500px;
 background: black;
-padding: 15px;
-box-shadow: 0 0 60px rgba(0,255,255,0.4);
-}
-.screen {
-background: #0d0d1f;
-height: 100%;
 border-radius: 20px;
-padding: 15px;
-}
-.card {
-background: #151530;
-padding: 15px;
-border-radius: 15px;
-margin-bottom: 10px;
-}
-.big svg {width: 100%;
-stroke: #00ffff;
-fill: none;
-}
-.row {
-display: flex;
-gap: 10px;
-}
-.circle {
-width: 80px;
-height: 80px;
-border: 5px solid #8a2be2;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
+padding: 10px;
 }
 
+.screen {
+background: #111;
+height: 100%;
+border-radius: 10px;
+padding: 10px;
+}
 
+/* SERVIÇOS */
+.services {
+padding: 60px;
+text-align: center;
+}
 
 .services h2 {
-  font-size: 48px;
-  margin-bottom: 50px;
-  text-align: center; /* centraliza o título horizontalmente */
+text-align: center;
 }
 
 .services-container {
-  display: flex;
-  justify-content: center; /* centraliza horizontalmente o para empresas e para pessoas */
-  gap: 50px;
-  flex-wrap: wrap;
+display: flex;
+gap: 30px;
+justify-content: center;
+flex-wrap: wrap;
 }
 
 .services-box {
-  background: #151530;
-  padding: 30px;
-  border-radius: 20px;
-  max-width: 350px;
-  text-align: left;
-  transform: translateY(50px);
-  opacity: 0;
-  transition: all 0.8s ease-out;
-  border: 1px solid rgba(0,255,255,0.2);
-  cursor: pointer;
-}
-
-.services-box h3 {
-  font-size: 28px;
-  margin-bottom: 10px;
-  color: #00ffff;
-}
-
-.click-to-view {
-  font-size: 16px;
-  color: rgba(255,255,255,0.7);
-  margin-bottom: 15px;
-}
-
-
-
-
-.accordion-content {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  overflow-y: auto; /* adiciona scroll vertical */
-  opacity: 0;
-  height: 0; /* animado pelo GSAP */
-  max-height: 400px; /* altura máxima visível da lista */
-  transition: opacity 0.5s ease;
-}
-
-/* Ajusta a aparência da scrollbar (opcional) */
-.accordion-content::-webkit-scrollbar {
-  width: 8px;
-}
-
-.accordion-content::-webkit-scrollbar-thumb {
-  background: #00ffff;
-  border-radius: 4px;
-}
-
-.accordion-content::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-
-
-
-.accordion-content li {
-  margin-bottom: 15px;
-  font-size: 16px;
-}
-
-.accordion-content.show {
-  opacity: 1;
-  max-height: 2000px; /* suficiente para todos os itens */
+background: #151530;
+padding: 20px;
+border-radius: 20px;
+width: 300px;
+cursor: pointer;
+transition: 0.3s;
 }
 
 .services-box:hover {
-  transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 0 30px #00ffff, 0 0 50px #8a2be2;
-  border-color: #00ffff;
+transform: translateY(-5px);
 }
 
-
-
-
-
-
-/* RODAPÉ NO CANTO SUPERIOR DIREITO */
-.top-right-footer {
-  position: fixed;
-  top: 40px;       /* Distância do topo */
-  right: 80px;     /* Distância da direita */
-  z-index: 10;
+.services-box:active {
+transform: scale(0.97);
 }
 
-.top-right-footer ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  margin: 0;
-  padding: 0;
+/* ACCORDION */
+.accordion-content {
+overflow-y: auto;
+height: 0;
+opacity: 0;
 }
 
-.top-right-footer ul li a {
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
-  font-size: 16px;
-  transition: all 0.3s ease;
+.accordion-content li {
+margin: 10px 0;
 }
 
-.top-right-footer ul li a:hover {
-  color: #00ffff;
-  transform: scale(1.05);
+/* MOBILE */
+@media (max-width: 768px) {
+
+.menu-right {
+position: static;
+justify-content: center;
+margin-top: 10px;
 }
 
+.hero {
+flex-direction: column;
+text-align: center;
+}
+
+.left h2 {
+font-size: 32px;
+}
+
+.phone {
+width: 180px;
+height: 360px;
+margin-top: 30px;
+}
+
+.services-container {
+flex-direction: column;
+align-items: center;
+}
+
+.services-box {
+width: 90%;
+}
+
+.accordion-content {
+max-height: 200px;
+}
+}
