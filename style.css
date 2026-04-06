@@ -171,6 +171,22 @@ flex-direction: column;
 align-items: center;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .services-box {
 width: 90%;
 }
@@ -179,3 +195,78 @@ width: 90%;
 max-height: 200px;
 }
 }
+
+
+/* Cards de serviços com visual moderno */
+.card {
+  background: #0d0d1f;
+  border-radius: 20px;
+  padding: 20px;
+  flex: 1;                  /* boxes lado a lado ocupando espaço igual */
+  min-width: 300px;
+  max-width: 400px;
+  box-shadow: 0 0 20px #00ffff, 0 0 40px #8a2be2; /* efeito neon */
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-10px);      /* sobe ao passar o mouse */
+  box-shadow: 0 0 40px #00ffff, 0 0 60px #8a2be2;
+}
+
+.card h3 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 15px;
+
+  /* Gradiente no texto */
+  background: linear-gradient(90deg, #8a2be2, #00ffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* compatível com todos os navegadores */
+  background-clip: text; 
+  color: transparent;
+  display: inline-block; /* ESSENCIAL para o gradiente funcionar */
+}
+
+
+.scroll-box {
+  max-height: 220px;       /* altura da box antes de precisar rolar */
+  overflow-y: auto;        /* adiciona scroll vertical */
+  padding-right: 10px;
+  border-left: 2px solid #8a2be2;  /* efeito visual “tech” */
+  border-right: 2px solid #8a2be2;
+  border-radius: 10px;
+}
+
+/* Scroll estilizado */
+.scroll-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-box::-webkit-scrollbar-thumb {
+  background: #00ffff;
+  border-radius: 4px;
+  box-shadow: inset 0 0 5px #8a2be2;
+}
+
+.scroll-box::-webkit-scrollbar-track {
+  background: #0d0d1f;
+}
+
+/* Efeito hover nos itens da lista */
+.scroll-box ul li {
+  padding: 8px 5px;
+  border-bottom: 1px solid rgba(0,255,255,0.2);
+  transition: background 0.3s, color 0.3s;
+}
+
+.scroll-box ul li:hover {
+  background: #00ffff;
+  color: #050510;
+  cursor: default;
+}
+
