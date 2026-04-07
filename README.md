@@ -31,8 +31,8 @@ O site é uma **landing page responsiva** com foco em apresentação de serviço
 
 ## 📸 Screenshots / Demonstração
 
-![Homepage](link-da-screenshot.png)  
-*Exemplo da página inicial do site*
+![Homepage do site](images/homepage.png)
+
 
 ---
 ## Licença
