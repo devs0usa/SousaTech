@@ -36,12 +36,3 @@ O site é uma **landing page responsiva** com foco em apresentação de serviço
 
 ![Homepage](link-da-screenshot.png)  
 *Exemplo da página inicial do site*
-
-
-## 🚀 Como Usar
-
-Para rodar localmente:
-
-1. Clone o repositório:
-```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
