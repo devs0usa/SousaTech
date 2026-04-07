@@ -28,13 +28,6 @@ O site é uma **landing page responsiva** com foco em apresentação de serviço
 - **Hospedagem:** Netlify  
 
 ---
-
-## 📸 Screenshots / Demonstração
-
-![Homepage do site](images/homepage.png)
-
-
----
 ## Licença
 
 © 2026 SousaTech. Todos os direitos reservados.  
