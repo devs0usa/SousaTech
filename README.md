@@ -1,8 +1,5 @@
 # Sousa Tech 🚀
 
-![Netlify Status](https://img.shields.io/netlify/SEU_SITE_ID) 
-![License: MIT](https://img.shields.io/badge/License-MIT-green.svg) 
-
 **Sousa Tech** é um site moderno de serviços de marketing digital que ajuda empresas e profissionais a crescer online com estratégias digitais, SEO, criação de sites e gestão de redes sociais.  
 
 🔗 **Demo ao vivo:** [Clique aqui](https://regal-bunny-9df3fb.netlify.app/)
@@ -36,3 +33,10 @@ O site é uma **landing page responsiva** com foco em apresentação de serviço
 
 ![Homepage](link-da-screenshot.png)  
 *Exemplo da página inicial do site*
+
+---
+## Licença
+
+© 2026 SousaTech. Todos os direitos reservados.  
+
+Nenhuma parte deste site pode ser copiada, reproduzida, modificada ou distribuída sem permissão explícita do autor.
