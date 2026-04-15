@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sousatech — Marketing para Clínicas Estéticas</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #050508;
+    --white: #f5f4f0;
+    --cream: #ede9e0;
+    --gold: #c9a96e;
+    --gold-light: #e8c98a;
+    --rose: #d4a0a0;
+    --accent: #b8d4c8;
+    --glow: rgba(201,169,110,0.18);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed; width: 12px; height: 12px;
+    background: var(--gold); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed; width: 40px; height: 40px;
+    border: 1px solid rgba(201,169,110,0.5); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transition: all 0.3s ease;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 100; opacity: 0.35;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 60px;
+    background: linear-gradient(to bottom, rgba(5,5,8,0.95), transparent);
+    backdrop-filter: blur(0px);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    color: rgba(245,244,240,0.6); text-decoration: none;
+    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: transparent; border: 1px solid var(--gold);
+    color: var(--gold); padding: 10px 28px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    cursor: none; transition: all 0.3s;
+    text-decoration: none; display: inline-block;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    position: relative; overflow: hidden; padding: 0 60px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201,169,110,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(180,210,200,0.06) 0%, transparent 60%);
+  }
+  .hero-lines {
+    position: absolute; inset: 0; overflow: hidden; opacity: 0.07;
+  }
+  .hero-lines::before {
+    content: '';
+    position: absolute; top: -50%; left: 50%;
+    width: 1px; height: 200%;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    animation: lineMove 8s ease-in-out infinite;
+  }
+  @keyframes lineMove {
+    0%, 100% { transform: translateX(-300px); opacity: 0.3; }
+    50% { transform: translateX(300px); opacity: 1; }
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 750px; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.25);
+    padding: 8px 18px; margin-bottom: 40px;
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-tag::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold); animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 800; line-height: 1.0;
+    letter-spacing: -0.02em;
+    opacity: 0; animation: fadeUp 0.9s 0.4s forwards;
+  }
+  .hero h1 .line-gold {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--rose));
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    display: block;
+  }
+  .hero-sub {
+    margin-top: 28px; font-size: 1.05rem;
+    color: rgba(245,244,240,0.55); line-height: 1.7; max-width: 500px;
+    font-weight: 300;
+    opacity: 0; animation: fadeUp 0.9s 0.6s forwards;
+  }
+  .hero-actions {
+    margin-top: 50px; display: flex; gap: 20px; align-items: center;
+    opacity: 0; animation: fadeUp 0.9s 0.8s forwards;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--black); padding: 16px 40px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500;
+    cursor: none; border: none; text-decoration: none; display: inline-block;
+    position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 40px rgba(201,169,110,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 50px rgba(201,169,110,0.4); }
+  .btn-secondary {
+    color: var(--white); text-decoration: none;
+    font-size: 0.85rem; letter-spacing: 0.1em;
+    display: flex; align-items: center; gap: 10px;
+    opacity: 0.7; transition: opacity 0.3s;
+  }
+  .btn-secondary:hover { opacity: 1; }
+  .btn-secondary .arrow {
+    width: 32px; height: 1px; background: var(--white);
+    position: relative; transition: width 0.3s;
+  }
+  .btn-secondary .arrow::after {
+    content: ''; position: absolute; right: 0; top: -3px;
+    width: 7px; height: 7px; border-top: 1px solid var(--white);
+    border-right: 1px solid var(--white); transform: rotate(45deg);
+  }
+  .btn-secondary:hover .arrow { width: 50px; }
+
+  /* HERO FLOAT ELEMENTS */
+  .hero-float {
+    position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 20px; z-index: 2;
+    opacity: 0; animation: fadeLeft 1s 1s forwards;
+  }
+  .float-card {
+    background: rgba(245,244,240,0.04); border: 1px solid rgba(201,169,110,0.15);
+    padding: 20px 28px; backdrop-filter: blur(20px); min-width: 220px;
+    position: relative; overflow: hidden;
+  }
+  .float-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%; background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+  .float-card .fc-num {
+    font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .float-card .fc-label {
+    font-size: 0.75rem; color: rgba(245,244,240,0.45);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translate(30px, -50%); }
+    to { opacity: 1; transform: translate(0, -50%); }
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    border-top: 1px solid rgba(201,169,110,0.15);
+    border-bottom: 1px solid rgba(201,169,110,0.15);
+    padding: 18px 0; overflow: hidden; background: rgba(201,169,110,0.03);
+  }
+  .marquee-track {
+    display: flex; gap: 0; animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-track span {
+    font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(201,169,110,0.6); padding: 0 40px;
+  }
+  .marquee-track span.dot { color: var(--gold); padding: 0 10px; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTION COMMON */
+  section { padding: 120px 60px; }
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px; display: flex;
+    align-items: center; gap: 14px;
+  }
+  .section-label::before {
+    content: ''; width: 30px; height: 1px; background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+  }
+  .section-title .hl {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  /* SERVICES */
+  .services { background: rgba(245,244,240,0.01); }
+  .services-header { max-width: 600px; margin-bottom: 70px; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: rgba(201,169,110,0.1);
+  }
+  .service-item {
+    background: var(--black); padding: 48px 40px;
+    position: relative; overflow: hidden;
+    transition: background 0.4s;
+  }
+  .service-item:hover { background: rgba(201,169,110,0.04); }
+  .service-item::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: linear-gradient(to right, var(--gold), var(--gold-light));
+    transition: width 0.5s ease;
+  }
+  .service-item:hover::after { width: 100%; }
+  .service-num {
+    font-family: 'Syne', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.3em; color: rgba(201,169,110,0.4); margin-bottom: 30px;
+  }
+  .service-icon {
+    width: 48px; height: 48px; margin-bottom: 24px;
+    background: rgba(201,169,110,0.08); border: 1px solid rgba(201,169,110,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+  }
+  .service-name {
+    font-family: 'Syne', sans-serif; font-size: 1.15rem;
+    font-weight: 700; margin-bottom: 14px; letter-spacing: -0.01em;
+  }
+  .service-desc {
+    font-size: 0.88rem; color: rgba(245,244,240,0.45); line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* WHY US */
+  .why { position: relative; overflow: hidden; }
+  .why-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(201,169,110,0.05) 0%, transparent 70%);
+  }
+  .why-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; position: relative; }
+  .why-visual {
+    position: relative; aspect-ratio: 1;
+    border: 1px solid rgba(201,169,110,0.12); overflow: hidden;
+  }
+  .why-visual-inner {
+    position: absolute; inset: 16px;
+    border: 1px solid rgba(201,169,110,0.08);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .why-orb {
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,169,110,0.25) 0%, rgba(201,169,110,0.05) 50%, transparent 70%);
+    animation: orbPulse 4s ease-in-out infinite;
+  }
+  @keyframes orbPulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.15); opacity: 1; }
+  }
+  .why-corner {
+    position: absolute; width: 20px; height: 20px;
+  }
+  .why-corner.tl { top: 0; left: 0; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+  .why-corner.tr { top: 0; right: 0; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+  .why-corner.bl { bottom: 0; left: 0; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+  .why-corner.br { bottom: 0; right: 0; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+  .why-stats {
+    position: absolute; right: -30px; bottom: 40px;
+    background: rgba(5,5,8,0.95); border: 1px solid rgba(201,169,110,0.2);
+    padding: 24px 30px; backdrop-filter: blur(20px);
+  }
+  .why-stats .stat-val {
+    font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .why-stats .stat-lbl {
+    font-size: 0.75rem; color: rgba(245,244,240,0.45); letter-spacing: 0.1em;
+    text-transform: uppercase; margin-top: 4px;
+  }
+  .why-content .section-label { margin-top: 0; }
+  .why-list { margin-top: 50px; display: flex; flex-direction: column; gap: 28px; }
+  .why-item { display: flex; gap: 20px; align-items: flex-start; }
+  .why-check {
+    width: 28px; height: 28px; flex-shrink: 0; margin-top: 2px;
+    border: 1px solid rgba(201,169,110,0.3);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 0.75rem;
+  }
+  .why-item-text h4 {
+    font-family: 'Syne', sans-serif; font-size: 0.95rem;
+    font-weight: 600; margin-bottom: 6px;
+  }
+  .why-item-text p {
+    font-size: 0.85rem; color: rgba(245,244,240,0.45); line-height: 1.65; font-weight: 300;
+  }
+
+  /* PROCESS */
+  .process { background: rgba(245,244,240,0.01); }
+  .process-header { text-align: center; max-width: 550px; margin: 0 auto 80px; }
+  .process-header .section-label { justify-content: center; }
+  .process-header .section-label::before { display: none; }
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+  .process-steps::before {
+    content: ''; position: absolute; top: 28px; left: 0; right: 0;
+    height: 1px; background: linear-gradient(to right, transparent, rgba(201,169,110,0.3), transparent);
+    z-index: 0;
+  }
+  .process-step { padding: 0 30px; position: relative; }
+  .step-num-wrap {
+    width: 56px; height: 56px; position: relative; z-index: 1; margin-bottom: 30px;
+    background: var(--black); border: 1px solid rgba(201,169,110,0.25);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-num {
+    font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .step-title {
+    font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+    margin-bottom: 12px; letter-spacing: -0.01em;
+  }
+  .step-desc {
+    font-size: 0.82rem; color: rgba(245,244,240,0.4); line-height: 1.7; font-weight: 300;
+  }
+
+  /* NICHE CALLOUT */
+  .niche {
+    background: linear-gradient(135deg, rgba(201,169,110,0.08), rgba(180,210,200,0.05));
+    border-top: 1px solid rgba(201,169,110,0.15);
+    border-bottom: 1px solid rgba(201,169,110,0.15);
+    text-align: center; padding: 100px 60px;
+  }
+  .niche-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; max-width: 800px; margin: 0 auto 30px;
+  }
+  .niche-sub {
+    font-size: 1rem; color: rgba(245,244,240,0.5); max-width: 500px;
+    margin: 0 auto 50px; font-weight: 300; line-height: 1.7;
+  }
+  .niche-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .niche-tag {
+    background: rgba(201,169,110,0.08); border: 1px solid rgba(201,169,110,0.2);
+    padding: 10px 22px; font-size: 0.78rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(245,244,240,0.7);
+  }
+
+  /* CONTACT / CTA */
+  .cta { position: relative; overflow: hidden; }
+  .cta-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(201,169,110,0.07) 0%, transparent 70%);
+  }
+  .cta-inner { position: relative; z-index: 2; text-align: center; max-width: 700px; margin: 0 auto; }
+  .cta-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 24px;
+  }
+  .cta-sub {
+    font-size: 1rem; color: rgba(245,244,240,0.5); margin-bottom: 60px;
+    font-weight: 300; line-height: 1.7;
+  }
+  .contact-cards { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 60px; }
+  .contact-card {
+    background: rgba(245,244,240,0.03); border: 1px solid rgba(201,169,110,0.18);
+    padding: 30px 36px; text-align: left; min-width: 220px;
+    transition: border-color 0.3s, background 0.3s; text-decoration: none;
+    display: block; color: inherit;
+    position: relative; overflow: hidden;
+  }
+  .contact-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,169,110,0.08), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .contact-card:hover::before { opacity: 1; }
+  .contact-card:hover { border-color: rgba(201,169,110,0.4); }
+  .cc-icon { font-size: 1.5rem; margin-bottom: 14px; display: block; }
+  .cc-type { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .cc-value { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 600; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(201,169,110,0.1);
+    padding: 40px 60px; display: flex;
+    align-items: center; justify-content: space-between;
+    background: rgba(5,5,8,0.8);
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .footer-copy { font-size: 0.78rem; color: rgba(245,244,240,0.25); }
+  .footer-ig {
+    font-size: 0.78rem; letter-spacing: 0.1em; color: rgba(245,244,240,0.4);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .footer-ig:hover { color: var(--gold); }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* GLOW LINE */
+  .glow-line {
+    height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0.3;
+  }
+
+  /* MOBILE */
+  @media(max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .hero { padding: 0 24px; }
+    .hero h1 { font-size: 2.8rem; }
+    .hero-float { display: none; }
+    .services-grid { grid-template-columns: 1fr; }
+    .why-inner { grid-template-columns: 1fr; gap: 50px; }
+    .why-visual { display: none; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .process-steps::before { display: none; }
+    .process-step { padding: 0; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SOUSATECH</div>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#por-que">Por Que Nós</a></li>
+    <li><a href="#processo">Processo</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="#contato" class="nav-cta">Falar Agora</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Especialistas em Clínicas Estéticas</div>
+    <h1>
+      Marketing que<br>
+      <span class="line-gold">transforma clínicas</span>
+      em referências.
+    </h1>
+    <p class="hero-sub">
+      Estratégias digitais precisas, conteúdo que converte e presença online que posiciona sua clínica como top of mind no mercado estético.
+    </p>
+    <div class="hero-actions">
+      <a href="https://wa.me/5521990409665" target="_blank" class="btn-primary">Começar Agora</a>
+      <a href="#servicos" class="btn-secondary">
+        Ver serviços <span class="arrow"></span>
+      </a>
+    </div>
+  </div>
+  <div class="hero-float">
+    <div class="float-card">
+      <div class="fc-num">Equipe</div>
+      <div class="fc-label">Time focado em estética</div>
+    </div>
+    <div class="float-card">
+      <div class="fc-num">Atendimento</div>
+      <div class="fc-label">Acompanhamento próximo</div>
+    </div>
+    <div class="float-card">
+      <div class="fc-num">Plano</div>
+      <div class="fc-label">Estratégia personalizada</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Gestão de Tráfego</span><span class="dot">✦</span>
+    <span>Identidade Visual</span><span class="dot">✦</span>
+    <span>Instagram & TikTok</span><span class="dot">✦</span>
+    <span>Google Ads</span><span class="dot">✦</span>
+    <span>Criação de Sites</span><span class="dot">✦</span>
+    <span>SEO Local</span><span class="dot">✦</span>
+    <span>Automação de Marketing</span><span class="dot">✦</span>
+    <span>Gestão de Tráfego</span><span class="dot">✦</span>
+    <span>Identidade Visual</span><span class="dot">✦</span>
+    <span>Instagram & TikTok</span><span class="dot">✦</span>
+    <span>Google Ads</span><span class="dot">✦</span>
+    <span>Criação de Sites</span><span class="dot">✦</span>
+    <span>SEO Local</span><span class="dot">✦</span>
+    <span>Automação de Marketing</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="servicos">
+  <div class="services-header">
+    <div class="section-label reveal">O que fazemos</div>
+    <h2 class="section-title reveal reveal-delay-1">
+      Soluções completas para <span class="hl">escalar sua clínica</span>
+    </h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-item reveal">
+      <div class="service-num">01</div>
+      <div class="service-icon">📣</div>
+      <div class="service-name">Gestão de Tráfego Pago</div>
+      <div class="service-desc">Campanhas no Meta Ads e Google Ads segmentadas para atrair pacientes qualificados e maximizar o retorno sobre investimento.</div>
+    </div>
+    <div class="service-item reveal reveal-delay-1">
+      <div class="service-num">02</div>
+      <div class="service-icon">📱</div>
+      <div class="service-name">Social Media Estético</div>
+      <div class="service-desc">Gestão profissional do seu Instagram e TikTok com conteúdo educativo, antes & depois e estratégias de engajamento orgânico.</div>
+    </div>
+    <div class="service-item reveal reveal-delay-2">
+      <div class="service-num">03</div>
+      <div class="service-icon">🌐</div>
+      <div class="service-name">Sites de Alta Conversão</div>
+      <div class="service-desc">Landing pages e sites otimizados para converter visitantes em agendamentos, com design moderno e velocidade máxima.</div>
+    </div>
+    <div class="service-item reveal reveal-delay-1">
+      <div class="service-num">04</div>
+      <div class="service-icon">🔍</div>
+      <div class="service-name">SEO Local</div>
+      <div class="service-desc">Posicionamento no Google Maps e pesquisas locais para que pacientes da sua região encontrem sua clínica primeiro.</div>
+    </div>
+    <div class="service-item reveal reveal-delay-2">
+      <div class="service-num">05</div>
+      <div class="service-icon">✦</div>
+      <div class="service-name">Identidade Visual</div>
+      <div class="service-desc">Branding sofisticado e coeso que transmite credibilidade, modernidade e profissionalismo para sua clínica estética.</div>
+    </div>
+    <div class="service-item reveal reveal-delay-3">
+      <div class="service-num">06</div>
+      <div class="service-icon">🤖</div>
+      <div class="service-name">Automação & CRM</div>
+      <div class="service-desc">Fluxos automatizados de WhatsApp, e-mail e follow-up para fidelizar pacientes e aumentar a recorrência de procedimentos.</div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- WHY -->
+<section class="why" id="por-que">
+  <div class="why-bg"></div>
+  <div class="why-inner">
+    <div class="why-visual reveal">
+      <div class="why-corner tl"></div>
+      <div class="why-corner tr"></div>
+      <div class="why-corner bl"></div>
+      <div class="why-corner br"></div>
+      <div class="why-visual-inner">
+        <div class="why-orb"></div>
+      </div>
+      <div class="why-stats">
+        <div class="stat-val">Clareza</div>
+        <div class="stat-lbl">Processo transparente para sua clínica</div>
+      </div>
+    </div>
+    <div class="why-content">
+      <div class="section-label reveal">Por que a Sousatech</div>
+      <h2 class="section-title reveal reveal-delay-1">
+        Não somos uma agência genérica.<br>
+        <span class="hl">Somos especialistas</span> no seu nicho.
+      </h2>
+      <div class="why-list">
+        <div class="why-item reveal reveal-delay-1">
+          <div class="why-check">✓</div>
+          <div class="why-item-text">
+            <h4>Foco 100% em clínicas estéticas</h4>
+            <p>Conhecemos as regulamentações, o comportamento do paciente e o que realmente funciona nesse mercado.</p>
+          </div>
+        </div>
+        <div class="why-item reveal reveal-delay-2">
+          <div class="why-check">✓</div>
+          <div class="why-item-text">
+            <h4>Estratégia orientada a resultados</h4>
+            <p>Cada ação é mensurada e otimizada. Trabalhamos com metas claras e relatórios transparentes.</p>
+          </div>
+        </div>
+        <div class="why-item reveal reveal-delay-3">
+          <div class="why-check">✓</div>
+          <div class="why-item-text">
+            <h4>Atendimento próximo e ágil</h4>
+            <p>Você tem acesso direto à nossa equipe. Sem burocracia, sem demoras. Sua clínica sempre em primeiro lugar.</p>
+          </div>
+        </div>
+        <div class="why-item reveal reveal-delay-4">
+          <div class="why-check">✓</div>
+          <div class="why-item-text">
+            <h4>Tecnologia e inovação</h4>
+            <p>Usamos as ferramentas mais avançadas do mercado para garantir que sua clínica esteja sempre à frente da concorrência.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- PROCESS -->
+<section class="process" id="processo">
+  <div class="process-header">
+    <div class="section-label reveal">Como funciona</div>
+    <h2 class="section-title reveal reveal-delay-1">Nosso <span class="hl">processo</span></h2>
+    <p style="color:rgba(245,244,240,0.45);font-size:0.9rem;margin-top:16px;font-weight:300;line-height:1.7;" class="reveal reveal-delay-2">
+      Da análise à execução, cada etapa é pensada para entregar um trabalho profissional e alinhado aos seus objetivos.
+    </p>
+  </div>
+  <div class="process-steps">
+    <div class="process-step reveal">
+      <div class="step-num-wrap"><span class="step-num">01</span></div>
+      <h3 class="step-title">Diagnóstico</h3>
+      <p class="step-desc">Análise completa da sua presença digital, concorrência e oportunidades no mercado local.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-1">
+      <div class="step-num-wrap"><span class="step-num">02</span></div>
+      <h3 class="step-title">Estratégia</h3>
+      <p class="step-desc">Planejamento personalizado com metas, canais e táticas específicas para o seu perfil de clínica.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-2">
+      <div class="step-num-wrap"><span class="step-num">03</span></div>
+      <h3 class="step-title">Execução</h3>
+      <p class="step-desc">Implementação ágil com conteúdo, campanhas e otimizações contínuas em todos os canais.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-3">
+      <div class="step-num-wrap"><span class="step-num">04</span></div>
+      <h3 class="step-title">Escalada</h3>
+      <p class="step-desc">Monitoramento constante, aprimoramentos e expansão do que funciona para sua clínica crescer de forma sustentável.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NICHE CALLOUT -->
+<div class="niche">
+  <h2 class="niche-title reveal">
+    Atendemos <span style="background:linear-gradient(135deg,var(--gold),var(--gold-light));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;">todos os tipos</span> de clínicas estéticas
+  </h2>
+  <p class="niche-sub reveal reveal-delay-1">Do consultório individual à rede de clínicas, temos a solução ideal para cada estágio do seu negócio.</p>
+  <div class="niche-tags reveal reveal-delay-2">
+    <span class="niche-tag">Estética Corporal</span>
+    <span class="niche-tag">Dermatologia</span>
+    <span class="niche-tag">Harmonização Facial</span>
+    <span class="niche-tag">Clínicas de Beleza</span>
+    <span class="niche-tag">Medicina Estética</span>
+    <span class="niche-tag">Laser & Tecnologia</span>
+    <span class="niche-tag">Spa & Bem-estar</span>
+    <span class="niche-tag">Odontologia Estética</span>
+  </div>
+</div>
+
+<!-- CTA / CONTACT -->
+<section class="cta" id="contato">
+  <div class="cta-bg"></div>
+  <div class="cta-inner">
+    <div class="section-label reveal" style="justify-content:center;"><span style="width:30px;height:1px;background:var(--gold);"></span> Fale conosco</div>
+    <h2 class="cta-title reveal reveal-delay-1">
+      Pronto para crescer?<br>
+      <span style="background:linear-gradient(135deg,var(--gold),var(--gold-light));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Vamos conversar.</span>
+    </h2>
+    <p class="cta-sub reveal reveal-delay-2">
+      Entre em contato agora e descubra como a Sousatech pode transformar a presença digital da sua clínica.
+    </p>
+    <a href="https://wa.me/5521990409665" target="_blank" class="btn-primary reveal reveal-delay-3">
+      💬 &nbsp;Falar pelo WhatsApp
+    </a>
+    <div class="contact-cards">
+      <a href="https://wa.me/5521990409665" target="_blank" class="contact-card reveal">
+        <span class="cc-icon">📱</span>
+        <div class="cc-type">WhatsApp</div>
+        <div class="cc-value">+55 (21) 99040-9665</div>
+      </a>
+      <a href="mailto:sousatech00@gmail.com" class="contact-card reveal reveal-delay-1">
+        <span class="cc-icon">✉️</span>
+        <div class="cc-type">E-mail</div>
+        <div class="cc-value">sousatech00@gmail.com</div>
+      </a>
+      <a href="https://instagram.com/sousatech00" target="_blank" class="contact-card reveal reveal-delay-2">
+        <span class="cc-icon">📸</span>
+        <div class="cc-type">Instagram</div>
+        <div class="cc-value">@sousatech00</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SOUSATECH</div>
+  <div class="footer-copy">© 2025 Sousatech. Todos os direitos reservados.</div>
+  <a href="https://instagram.com/sousatech00" target="_blank" class="footer-ig">@sousatech00</a>
+</footer>
+
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = -100, my = -100, rx = -100, ry = -100;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animCursor() {
+    cursor.style.left = mx - 6 + 'px'; cursor.style.top = my - 6 + 'px';
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx - 20 + 'px'; ring.style.top = ry - 20 + 'px';
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2)';
+      ring.style.transform = 'scale(1.5)'; ring.style.opacity = '0.4';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      ring.style.transform = 'scale(1)'; ring.style.opacity = '1';
+    });
+  });
+
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
